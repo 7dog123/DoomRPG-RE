@@ -30,6 +30,7 @@ entry initialized from old variable name")
 endif()
 find_path(SDL2_MIXER_INCLUDE_DIR SDL_mixer.h
   HINTS
+    ${PS2SDK}/ports
     ENV SDLMIXERDIR
     ENV SDLDIR
   PATH_SUFFIXES include/SDL2 include
@@ -46,6 +47,7 @@ endif()
 find_library(SDL2_MIXER_LIBRARY
   NAMES SDL2_mixer
   HINTS
+	${PS2SDK}/ports
     ENV SDLMIXERDIR
     ENV SDLDIR
   PATH_SUFFIXES lib

@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.25)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
+if (PS2)
+project(DoomRPG.elf LANGUAGES C)
+else()
 project(DoomRPG LANGUAGES C)
+endif()
 
 if(MSVC)
 	add_definitions("/D_CRT_SECURE_NO_WARNINGS")

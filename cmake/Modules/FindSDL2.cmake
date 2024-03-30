@@ -62,6 +62,7 @@ add_library(SDL2::SDL2 UNKNOWN IMPORTED)
 SET(SDL2_SEARCH_PATHS
 	~/Library/Frameworks
 	/Library/Frameworks
+	${PS2SDK}/ports
 	/usr/local
 	/usr
 	/sw # Fink
