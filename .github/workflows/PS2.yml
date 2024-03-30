@@ -1,0 +1,35 @@
+name: PS2 CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    container: ghcr.io/ps2dev/ps2dev:latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: add dependencies
+      run: |
+        apk update
+        apk add build-base git bash cmake pkgconfig texinfo
+
+    - name: build fluidsynth for PS2
+      run: |
+        git clone https://github.com/7dog123/fluidsynth-sans-glib
+        cd fluidsynth-sans-glib
+        cmake -B build --toolchain=${PS2DEV}/share/ps2dev.cmake --install-prefix=$PS2SDK/ports
+        cmake --build build
+        cmake --install build
+        
+    - name: Configure DoomRPG-RE for PS2
+      run: cmake -B build --toolchain=${PS2DEV}/share/ps2dev.cmake
+
+    - name: DoomRPG-RE build for ps2
+      run: cmake --build build
+
