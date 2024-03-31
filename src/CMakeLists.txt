@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${RESOURCES_FILES
 
 if(PS2)
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::mixer ZLIB::ZLIB -lfluidsynth -lgskit -ldmakit 
-	-lcdvd -lm -ldebug -lstdc++ -lmodplug -lps2_drivers -lmouse -lkbd)
+	-lcdvd -lm -lpoweroff -ldebug -lstdc++ -lmodplug -lps2_drivers -lmouse -lkbd)
 else()
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::mixer ZLIB::ZLIB FluidSynth::libfluidsynth)
 endif()
