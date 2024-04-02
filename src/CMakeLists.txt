@@ -17,8 +17,8 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Resources Files" FILES ${R
 add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${RESOURCES_FILES})
 
 if(PS2)
-target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::mixer ZLIB::ZLIB -lfluidsynth -lgskit -ldmakit 
-	-lcdvd -lm -lpoweroff -ldebug -lpatches -lstdc++ -lmodplug -lps2_drivers -lmouse -lkbd)
+include_directories(${SDL2_INCLUDE_DIR} ${SDL2_MIXER_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} -lSDL2 -lSDL2main -lSDL2_mixer -lz -lfluidsynth -lstdc++ -lmodplug -lps2_drivers -lgskit -ldmakit -lpatches)
 else()
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::mixer ZLIB::ZLIB FluidSynth::libfluidsynth)
 endif()
