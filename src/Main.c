@@ -145,7 +145,11 @@ int main(int argc, char* args[])
 						SDL_Log("Window %d closed", ev.window.windowID);
 						closeZipFile(&zipFile);
 						DoomRPG_FreeAppData(doomRpg);
-						SDL_CloseAudio();
+					#ifdef PS2
+						void PS2_SDL_CloseAudio();
+					#else
+						void SDL_CloseAudio();
+					#endif
 						SDL_Close();
 						exit(0);
 						break;
@@ -199,7 +203,11 @@ int main(int argc, char* args[])
 
 	closeZipFile(&zipFile);
 	DoomRPG_FreeAppData(doomRpg);
-	SDL_CloseAudio();
+#ifdef PS2
+	void PS2_SDL_CloseAudio();
+#else
+	void SDL_CloseAudio();
+#endif
 	SDL_Close();
 
 	return 0;

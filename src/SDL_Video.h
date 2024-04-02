@@ -17,7 +17,11 @@ typedef struct SDLVideo_s
 extern SDLVideo_t sdlVideo;
 
 void SDL_InitVideo(void);
-void SDL_Close(void);
+#ifdef PS2
+void PS2_SDL_CloseAudio(void);
+#else
+void SDL_CloseAudio(void);
+#endif
 SDLVideo_t* SDL_GetVideo(void);
 void SDL_RenderDrawFillCircle(SDL_Renderer* renderer, int x, int y, int r);
 void SDL_RenderDrawCircle(SDL_Renderer* renderer, int x, int y, int r);

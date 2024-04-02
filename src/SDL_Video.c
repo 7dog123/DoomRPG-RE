@@ -283,7 +283,12 @@ void SDL_InitAudio(void)
 	}
 }
 
-void SDL_CloseAudio(void) {
+#ifdef PS2
+void PS2_SDL_CloseAudio(void)
+#else
+void SDL_CloseAudio(void)
+#endif
+{
 
 	delete_fluid_audio_driver(fluidSynth.adriver);
 	delete_fluid_synth(fluidSynth.synth);
