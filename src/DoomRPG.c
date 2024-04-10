@@ -1132,7 +1132,7 @@ void DoomRPG_notifyDestroyed(DoomRPG_t* doomrpg)
 
 void File_writeBoolean(SDL_RWops* rw, int i)
 {
-	boolean boolData;
+	char boolData;
 
 	boolData = (i != 0) ? true : false;
 	if (rw) {
@@ -1142,7 +1142,7 @@ void File_writeBoolean(SDL_RWops* rw, int i)
 
 void File_writeByte(SDL_RWops* rw, int i)
 {
-	int bData;
+	char bData;
 	bData = i;
 	if (rw) {
 		SDL_RWwrite(rw, &bData, sizeof(byte), 1);
@@ -1151,8 +1151,8 @@ void File_writeByte(SDL_RWops* rw, int i)
 
 void File_writeShort(SDL_RWops* rw, int i)
 {
-	int sData;
-	sData = i;
+	short sData;
+	sData = SDL_SwapLE16(i);
 	if (rw) {
 		SDL_RWwrite(rw, &sData, sizeof(short), 1);
 	}
@@ -1161,7 +1161,7 @@ void File_writeShort(SDL_RWops* rw, int i)
 void File_writeInt(SDL_RWops* rw, int i)
 {
 	int iData;
-	iData = i;
+	iData = SDL_SwapLE32(i);
 	if (rw) {
 		SDL_RWwrite(rw, &iData, sizeof(int), 1);
 	}
@@ -1169,7 +1169,7 @@ void File_writeInt(SDL_RWops* rw, int i)
 void File_writeLong(SDL_RWops* rw, int i)
 {
 	long lData;
-	lData = i;
+	lData = SDL_SwapLE32(i);
 	if (rw) {
 		SDL_RWwrite(rw, &lData, sizeof(long), 1);
 	}
@@ -1177,13 +1177,13 @@ void File_writeLong(SDL_RWops* rw, int i)
 
 boolean File_readBoolean(SDL_RWops* rw)
 {
-	int boolData;
+	char boolData;
 
 	if (rw) {
 		SDL_RWread(rw, &boolData, sizeof(byte), 1);
 	}
 
-	return boolData & 0xff;
+	return boolData;
 }
 
 int File_readByte(SDL_RWops* rw)
@@ -1205,7 +1205,7 @@ int File_readShort(SDL_RWops* rw)
 		SDL_RWread(rw, &sData, sizeof(short), 1);
 	}
 
-	return (int)sData;
+	return (int)SDL_SwapLE16(sData);
 }
 
 int File_readInt(SDL_RWops* rw)
@@ -1216,7 +1216,7 @@ int File_readInt(SDL_RWops* rw)
 		SDL_RWread(rw, &iData, sizeof(int), 1);
 	}
 
-	return (int)iData;
+	return (int)SDL_SwapLE32(iData);
 }
 
 int File_readLong(SDL_RWops* rw)
@@ -1227,5 +1227,5 @@ int File_readLong(SDL_RWops* rw)
 		SDL_RWread(rw, &lData, sizeof(long), 1);
 	}
 
-	return (int)lData;
+	return (int)SDL_SwapLE32(lData);
 }
